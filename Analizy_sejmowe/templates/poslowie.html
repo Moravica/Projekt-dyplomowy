@@ -1,0 +1,51 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analizy sejmowe</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    {% set opcje_json = opcje | tojson %}
+</head>
+<body>
+    <div id="container">
+        <div id="sidebar">
+            <div id="menu">
+                <p>MODUŁY</p>
+                <ul>
+                    <li><a href="/ustawy">Ustawy</a></li>
+                    <li><a href="/poslowie ">Posłowie</a></li>
+                    <li><a href="/wyszukaj_posla ">Wyszukiwanie posłów</a></li>
+                    <li><a href="/wyszukaj-wypowiedz">Wyszukiwanie przemówień</a></li>
+                    <li><a href="/komisje">Terminy</a></li>
+                </ul>
+            </div>
+            <div id="footer">
+                <p>Created by <br> Piotr Słowakiewicz <br> 2024</p>
+            </div>
+        </div>
+        <div id="content">
+            <h1>ANALIZY SEJMOWE | POSŁOWIE</h1>
+            <form action="{{ url_for('poslowie') }}" method="post" style="margin-top: 20px;">
+                <label for="opcja">Wybierz opcję:</label>
+                <select name="opcja" id="opcja" style="margin-left: 10px;">
+                    {% for opcja in opcje %}
+                        <option value="{{ opcja }}">{{ opcja }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit" style="margin-left: 10px; ">Wybierz</button>
+            </form>       
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script>
+        function redirectToLoader() {
+            // Przekieruj użytkownika do strony loader.html
+            window.location.href = "/loader";
+        }
+    </script>
+
+</body>
+</html>
